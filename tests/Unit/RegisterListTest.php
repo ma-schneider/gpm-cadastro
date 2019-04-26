@@ -13,6 +13,7 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\User;
 
 /**
  * Test for Register List
@@ -39,6 +40,12 @@ class RegisterListTest extends TestCase
     {
         parent::setUp();
         $this->response = $this->get('/socios');
+        $this->artisan('db:seed', ['--class' => 'DatabaseSeeder']);
+    }
+
+    public function tearDown(): void
+    {
+        parent::tearDown();
 
     }
 
@@ -60,5 +67,44 @@ class RegisterListTest extends TestCase
     public function testView()
     {
         $this->response->assertViewIs('socios.index');
+    }
+
+    /**
+     * Must contain the table html markup.
+     * 
+     * @return void
+     */
+    public function testHtml()
+    {
+        $this->response->assertSee('<table');
+        $this->response->assertSee('>Nº');
+        $this->response->assertSee('>Nome');
+        $this->response->assertSee('>E-mail');
+        $this->response->assertSee('>Foto');
+    }
+
+    /**
+     * Must contain the members variable.
+     * 
+     * @return void
+     */
+    public function testMembers()
+    {
+        $this->response->assertViewHas('members');
+    }
+
+    /**
+     * Must contain Members values.
+     * 
+     * @return void
+     */
+    public function testMembersValues()
+    {
+        $user = User::find(1);
+        $this->response->assertSee('>' . $user->number);
+        $this->response->assertSee('>' . $user->name);
+        $this->response->assertSee('>' . $user->email);
+        $this->response->assertSee('>' . $user->photo);
+        
     }
 }
