@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/socios', function () {
-    return view('socios.index');
-});
+Route::get('/socios', 'RegisterListController@index');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
