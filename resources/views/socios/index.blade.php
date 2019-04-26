@@ -1,11 +1,11 @@
 <table>
     <thead>
-        <th>
-            <td>Nº</td>
-            <td>Nome</td>
-            <td>E-mail</td>
-            <td>Foto</td>
-        </th>
+        <tr>
+            <th>Nº</th>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Foto</th>
+        </tr>
     </thead>
     <tbody>
         @foreach ($members as $item)
@@ -13,7 +13,7 @@
                 <td>{{ $item->number }}</td>
                 <td>{{ $item->name }}</td>
                 <td>{{ $item->email }}</td>
-                <td>{{ $item->photo }}</td>
+                <td><img src="{{ $item->photo }}" /></td>
             </tr>    
         @endforeach
     </tbody>
