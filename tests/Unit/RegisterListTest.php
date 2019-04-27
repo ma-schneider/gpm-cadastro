@@ -104,7 +104,7 @@ class RegisterListTest extends TestCase
         $this->response->assertSee('>' . $user->number);
         $this->response->assertSee('>' . $user->name);
         $this->response->assertSee('>' . $user->email);
-        $this->response->assertSee('>' . $user->photo);
+        $this->response->assertSee('src="' . $user->photo);
         
     }
 }
