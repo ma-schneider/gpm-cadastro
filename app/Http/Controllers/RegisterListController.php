@@ -40,14 +40,8 @@ class RegisterListController extends Controller
      */
     public function index()
     {
-        $members = $this->user->all(); 
+        $members = $this->user->paginate(4); 
         
         return view('socios.index', compact('members'));
-        // $members = new \stdClass();
-        // $members->name = 'Marcelo';
-        // $members->number = '1';
-        // $members->email = 'test@test.com';
-        // $members->photo = 'Minha foto';
-        // return view('socios.index', compact('members'));
     }
 }
