@@ -107,4 +107,37 @@ class RegisterListTest extends TestCase
         $this->response->assertSee('src="' . $user->photo);
         
     }
+
+    /**
+     * Must extend the app layout.
+     * 
+     * @return void
+     */
+    public function testExtendAppLayout()
+    {
+        $this->response->assertSee('<nav');
+        $this->response->assertSee('class="container"');
+    }
+
+    /**
+     * View must has pagination.
+     * 
+     * @return void
+     */
+    public function testSeePagination()
+    {
+        $this->response->assertSee('pagination');
+    }
+
+    /**
+     * Must be a hoverable table.
+     * 
+     * @return void
+     */
+    public function testTableStyle()
+    {
+        $this->response->assertSee('table table-hover');
+        $this->response->assertSee('Lista de sócios');
+    }
+
 }
