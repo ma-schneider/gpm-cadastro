@@ -10,14 +10,18 @@
     <title>{{ config('app.name', 'Cadastro GPM') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ secure_asset('js/app.js') }}" defer></script>
+    @if (env('APP_ENV') === 'production')
+        <script src="{{ secure_asset('js/app.js') }}" defer></script>
+        <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+    @else
+        <script src="{{ asset('js/app.js') }}" defer></script>
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @endif
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
