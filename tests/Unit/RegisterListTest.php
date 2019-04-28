@@ -138,6 +138,7 @@ class RegisterListTest extends TestCase
     {
         $this->response->assertSee('table table-hover');
         $this->response->assertSee('Lista de sócios');
+        $this->response->assertSee('Cadastro GPM');
     }
 
 }
