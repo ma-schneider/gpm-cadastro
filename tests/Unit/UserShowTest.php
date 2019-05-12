@@ -101,4 +101,18 @@ class UserShowTest extends TestCase
             ->assertSee($this->user->updated_at);
     }
 
+    /**
+     * Main tempolate must be imported.
+     * 
+     * @return void
+     */
+    public function testMainTemplateImport()
+    {
+        $appName = env('APP_NAME');
+
+        $this->response
+            ->assertSee('<nav')
+            ->assertSee($appName);
+    }
+
 }

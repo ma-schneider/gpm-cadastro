@@ -1,3 +1,5 @@
+@extends('layouts.app')
+
 <p>{{ $user->id }}</p>
 <p>{{ $user->name }}</p>
 <p>{{ $user->photo }}</p>
