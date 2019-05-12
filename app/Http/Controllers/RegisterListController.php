@@ -28,6 +28,13 @@ class RegisterListController extends Controller
 
     protected $user;
 
+    /**
+     * Class constructor.
+     * 
+     * @param User $user User Instante
+     * 
+     * @return void
+     */
     public function __construct(User $user) 
     {
         $this->user = $user;
@@ -44,4 +51,33 @@ class RegisterListController extends Controller
         
         return view('socios.index', compact('members'));
     }
+
+    /**
+     * Show user details page.
+     * 
+     * @param Integer $id User Id.
+     * 
+     * @return View
+     */
+    public function show($id)
+    {
+        $user = $this->user->find($id);
+
+        return view('socios.show', compact('user'));
+    }
+
+    /**
+     * Remove user.
+     * 
+     * @param Integer $id User Id.
+     * 
+     * @return Redirect
+     */
+    public function destroy($id)
+    {
+        $user = $this->user->find($id)->delete();
+
+        return redirect()->route('socios.index');
+    }
+
 }
