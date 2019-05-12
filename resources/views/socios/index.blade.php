@@ -18,8 +18,12 @@
         <tbody>
             @foreach ($members as $item)
                 <tr>
-                    <th scope="row" class="align-middle">{{ $item->number }}</th>
-                    <td class="align-middle">{{ $item->name }}</td>
+                    <th scope="row" class="align-middle">
+                        <a href="{{ route('socios.show', ['id' => $item->id]) }}">{{ $item->number }}</a>
+                    </th>
+                    <td class="align-middle">
+                        <a href="{{ route('socios.show', ['id' => $item->id]) }}">{{ $item->name }}</a>
+                    </td>
                     <td class="align-middle">{{ $item->email }}</td>
                     <td><img class="thumbnail" src="{{ $item->photo }}" /></td>
                 </tr>    

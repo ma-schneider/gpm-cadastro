@@ -43,6 +43,11 @@ class RegisterListTest extends TestCase
         $this->artisan('db:seed', ['--class' => 'DatabaseSeeder']);
     }
 
+    /**
+     * Preparing for the next test.
+     * 
+     * @return void
+     */
     public function tearDown(): void
     {
         parent::tearDown();
