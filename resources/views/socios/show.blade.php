@@ -36,10 +36,17 @@
         </div>
     </div>
 
-    <form method="POST" action="{{ route('socios.destroy', ['id' => $user->id]) }}">
-        @csrf
-        @method('delete')
-        <button class="btn btn-danger float-right" type="submit" dusk="delete">Deletar</button>
-    </form>
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#remove-user" dusk="remove-user">
+        Remover Sócio
+    </button>
+
+    <div class="modal fade" id="remove-user" role="dialog">
+        <p>Remover Sócio</p>
+        <form method="POST" action="{{ route('socios.destroy', ['id' => $user->id]) }}">
+            @csrf
+            @method('delete')
+            <button type="submit" dusk="confirmation">Remover Sócio</button>
+        </form>
+    </div>
     
 @endsection
