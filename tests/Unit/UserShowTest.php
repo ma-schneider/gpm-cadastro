@@ -102,7 +102,7 @@ class UserShowTest extends TestCase
     }
 
     /**
-     * Main tempolate must be imported.
+     * Main template must be imported.
      * 
      * @return void
      */
@@ -113,6 +113,16 @@ class UserShowTest extends TestCase
         $this->response
             ->assertSee('<nav')
             ->assertSee($appName);
+    }
+
+    /**
+     * View must has a Remover Sócio Button
+     * 
+     * @return void
+     */
+    public function testViewHasDeleteButton()
+    {
+        $this->response->assertSee('Remover Sócio</button');
     }
 
 }

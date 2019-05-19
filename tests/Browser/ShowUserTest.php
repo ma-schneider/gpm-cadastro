@@ -53,7 +53,26 @@ class ShowUserTest extends DuskTestCase
     }
 
     /**
-     * Test Delete user button
+     * Must show a Rmove User confirmation modal.
+     * 
+     * @return void
+     */
+    public function testRemoveUserModal()
+    {
+        $this->browse(
+            function ($browser) {
+                $browser->loginAs($this->user)
+                    ->visit('/socios/' . $this->user->id)
+                    ->click('@remove-user')
+                    ->waitFor('#remove-user')
+                    ->assertSee('Remover Sócio')
+                    ->assertSeeIn('@confirmation', 'Remover Sócio');
+            }
+        );
+    }
+
+    /**
+     * Test Remove User button
      * 
      * @return void
      */
@@ -63,9 +82,12 @@ class ShowUserTest extends DuskTestCase
             function ($browser) {
                 $browser->loginAs($this->user)
                     ->visit('/socios/' . $this->user->id)
-                    ->click('@delete')
+                    ->click('@remove-user')
+                    ->waitFor('#remove-user')
+                    ->click('@confirmation')
                     ->waitForLocation('/socios')
-                    ->assertDontSee($this->user->name);
+                    ->assertDontSee($this->user->name)
+                    ->assertSee('Sócio removido com sucesso');
             }
         );
     }

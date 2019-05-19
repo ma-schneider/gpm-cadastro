@@ -69,13 +69,20 @@ class RegisterListController extends Controller
     /**
      * Remove user.
      * 
-     * @param Integer $id User Id.
-     * 
+     * @param Integer $id      User Id.
+     * @param Request $request Request instance
+     *  
      * @return Redirect
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
         $user = $this->user->find($id)->delete();
+        
+        if ($user) {
+            $request->session()->flash('success', 'Sócio removido com sucesso.');
+        } else {
+            $request->session()->flash('danger', 'Não foi possível remover o sócio.');
+        }
 
         return redirect()->route('socios.index');
     }
