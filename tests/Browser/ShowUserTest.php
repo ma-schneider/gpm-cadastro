@@ -86,7 +86,8 @@ class ShowUserTest extends DuskTestCase
                     ->waitFor('#remove-user')
                     ->click('@confirmation')
                     ->waitForLocation('/socios')
-                    ->assertDontSee($this->user->name);
+                    ->assertDontSee($this->user->name)
+                    ->assertSee('Sócio removido com sucesso');
             }
         );
     }
