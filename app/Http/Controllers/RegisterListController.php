@@ -53,6 +53,30 @@ class RegisterListController extends Controller
     }
 
     /**
+     * Show the create page.
+     * 
+     * @return View
+     */
+    public function create()
+    {
+        return view('socios.create');
+    }
+
+    /**
+     * Store a new User
+     * 
+     * @param Request $request Http Request
+     * 
+     * @return void
+     */
+    public function store(Request $request)
+    {
+        $user = $this->user->create($request->all());
+
+        return redirect()->route('socios.create');
+    }
+
+    /**
      * Show user details page.
      * 
      * @param Integer $id User Id.
