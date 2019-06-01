@@ -1,25 +1,40 @@
-<form action="{{ route('socios.store') }}" method="POST">
+@extends('layouts.app')
 
-    @csrf
-    @method('POST')
+@section('title')
+    Cadastro
+@endsection
 
-    <label for="name">Nome</label>
-    <input id="name" type="text" name="name">
+@section('content')
+    <form action="{{ route('socios.store') }}" method="POST">
 
-    <label for="email">E-mail</label>
-    <input id="email" type="text" name="email">
+        @csrf
+        @method('POST')
+        <div class="form-group">
+            <label for="name">Nome</label>
+            <input class="form-control" id="name" type="text" name="name">
+        </div>
+        <div class="form-group">
+            <label for="email">E-mail</label>
+            <input class="form-control" id="email" type="text" name="email">
+        </div>
+        <div class="form-group">
+            <label for="email-verified-at">Confirmação do e-mail</label>
+            <input class="form-control" type="text" id="email-verified-at" name="email_verified_at">    
+        </div>
+        <div class="form-group">
+            <label for="number">Número de sócio</label>
+            <input class="form-control" type="text" id="number" name="number">    
+        </div>
+        <div class="form-group">
+            <label for="photo">Foto</label>
+            <input class="form-control" type="text" id="photo" name="photo">    
+        </div>
 
-    <label for="email-verified-at">Confirmação do e-mail</label>
-    <input type="text" id="email-verified-at" name="email_verified_at">
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input class="form-control" type="text" id="password" name="password">    
+        </div>
 
-    <label for="number">Número de sócio</label>
-    <input type="text" id="number" name="number">
-
-    <label for="photo">Foto</label>
-    <input type="text" id="photo" name="photo">
-
-    <label for="password">Password</label>
-    <input type="text" id="password" name="password">
-
-    <button type="submit" dusk="register">Cadastrar</button>
-</form>
+        <button class="btn btn-primary" type="submit" dusk="register">Cadastrar</button>
+    </form>
+@endsection
