@@ -71,9 +71,14 @@ class RegisterListController extends Controller
      */
     public function store(Request $request)
     {
-        $user = $this->user->create($request->all());
-
-        return redirect()->route('socios.create');
+        try {
+            $this->user->create($request->all());
+            $request->session()->flash('success', 'Sócio cadastrado com sucesso.');
+            return redirect()->route('socios.create');
+        } catch (Exception $e) {
+            $request->session()->flash('danger', $e);
+            return redirect()->route('socios.create');  
+        }
     }
 
     /**

@@ -78,6 +78,17 @@
 
         <main class="py-4">
             <div class="container mt-5">
+                    @if ($message = Session::has('success'))
+                        <div class="alert alert-success" role="alert">
+                            {{ Session::get('success') }}
+                        </div>
+                    @endif
+                    
+                    @if ($message = Session::has('danger'))
+                        <div class="alert alert-success" role="alert">
+                            {{ Session::get('danger') }}
+                        </div>
+                    @endif
                 <h2>@yield('title')</h2>
                 @yield('content')
             </div>

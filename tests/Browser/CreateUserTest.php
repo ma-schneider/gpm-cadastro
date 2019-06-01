@@ -63,7 +63,8 @@ class CreateUserTest extends DuskTestCase
                     ->type('photo', $this->newUser->photo)
                     ->type('password', 'secret')
                     ->click('@register')
-                    ->waitForLocation('/socios/create');
+                    ->waitForLocation('/socios/create')
+                    ->assertSee('Sócio cadastrado com sucesso');
             }
         );
         
