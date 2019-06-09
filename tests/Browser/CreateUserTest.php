@@ -60,7 +60,7 @@ class CreateUserTest extends DuskTestCase
                     ->type('email', $this->newUser->email)
                     ->type('email_verified_at', $this->newUser->email)
                     ->type('number', $this->newUser->number)
-                    ->type('photo', $this->newUser->photo)
+                    ->attach('photo', __DIR__.'/photos/santos.jpg')
                     ->type('password', 'secret')
                     ->click('@register')
                     ->waitForLocation('/socios/create')

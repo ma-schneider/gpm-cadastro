@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <form action="{{ route('socios.store') }}" method="POST">
+    <form action="{{ route('socios.store') }}" method="POST" enctype="multipart/form-data">
 
         @csrf
         @method('POST')
@@ -27,7 +27,7 @@
         </div>
         <div class="form-group">
             <label for="photo">Foto</label>
-            <input class="form-control" type="text" id="photo" name="photo">    
+            <input class="form-control-file" type="file" id="photo" name="photo">    
         </div>
 
         <div class="form-group">

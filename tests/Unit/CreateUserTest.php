@@ -14,6 +14,8 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\UploadedFile;
 use App\User;
 
 /**
@@ -96,9 +98,17 @@ class CreateUserTest extends TestCase
      */
     public function testStorePath()
     {
-        $user = factory(User::class)->make()->toArray();
-        $response = $this->json('POST', '/socios', $user);
+        Storage::fake('public');
 
-        $response->assertOk();
+        $user = factory(User::class)->make()->toArray();
+        $user['password'] = '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm';
+
+        $file = UploadedFile::fake()->image('photo.jpeg');
+        $user['photo'] = $file;
+
+        $response = $this->json('POST', '/socios', $user);
+        $response->assertStatus(302);
+
+        Storage::disk('public')->assertExists('photos/' . $file->hashName());
     }
 }
