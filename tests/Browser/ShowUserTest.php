@@ -91,5 +91,20 @@ class ShowUserTest extends DuskTestCase
             }
         );
     }
+
+    public function testShowUserData()
+    {
+        $this->browse(
+            function ($browser) {
+
+                $photoPath = 'http://localhost/storage/' . $this->user->photo;
+
+                $browser->loginAs($this->user)
+                    ->visit('/socios/' . $this->user->id)
+                    ->assertSee($this->user->name)
+                    ->assertSee($this->user->email);
+            }
+        );
+    }
     
 }
