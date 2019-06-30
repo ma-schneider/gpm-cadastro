@@ -16,10 +16,16 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(User::class, function (Faker $faker) {
+    
+    $storagePath = storage_path('app/public/photos');
+    $file = $faker->image($storagePath, 120, 80);
+    $fileParts = explode('/', $file);
+    $filePath = 'photos/' . end($fileParts);
+
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
-        'photo' => $faker->imageUrl(120, 80),
+        'photo' => $filePath,
         'number' => $faker->randomNumber(4),
         'email_verified_at' => now(),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password

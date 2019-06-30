@@ -34,7 +34,7 @@
                         <a href="{{ route('socios.show', ['id' => $item->id]) }}">{{ $item->name }}</a>
                     </td>
                     <td class="align-middle">{{ $item->email }}</td>
-                    <td><img class="thumbnail" src="{{ $item->photo }}" /></td>
+                    <td><img height="90" width="190" class="thumbnail" src="{{ asset('storage/'. $item->photo) }}" /></td>
                 </tr>    
             @endforeach
         </tbody>

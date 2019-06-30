@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="media">
-                <img src="{{ $user->photo }}" class="mr-3 img-thumbnail rounded" alt="Foto do sócio">
+                <img class="img-thumbnail" height="200" width="300" src="{{ asset('storage/' . $user->photo) }}" class="mr-3 img-thumbnail rounded" alt="Foto do sócio">
                 <div class="media-body">
                     <b><h3 class="mt-0">{{ $user->name }}</h3></b>
                 </div>

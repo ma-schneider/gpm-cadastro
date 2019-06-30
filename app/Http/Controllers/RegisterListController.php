@@ -12,6 +12,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Suport\Facades\Storage;
 use App\User;
 
 /**
@@ -72,7 +73,10 @@ class RegisterListController extends Controller
     public function store(Request $request)
     {
         try {
-            $this->user->create($request->all());
+            $path = $this->storeFile($request);
+            $user = $request->all();
+            $user['photo'] = $path;
+            $this->user->create($user);
             $request->session()->flash('success', 'Sócio cadastrado com sucesso.');
             return redirect()->route('socios.create');
         } catch (Exception $e) {
@@ -114,6 +118,23 @@ class RegisterListController extends Controller
         }
 
         return redirect()->route('socios.index');
+    }
+
+    /**
+     * Store a given file.
+     * 
+     * @param Request $request Request Instance
+     * 
+     * @return string
+     */
+    protected function storeFile(Request $request)
+    {
+        if ($request->hasFile('photo')) {
+            $path = $request->file('photo')->store('photos', 'public');
+            return $path;   
+        }
+        
+        return null;
     }
 
 }
