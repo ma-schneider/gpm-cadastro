@@ -18,7 +18,7 @@ class AddFieldsToUsersTable extends Migration
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();
-            $table->integer('membership')->nullable();
+            $table->date('membership')->nullable();
             $table->date('birthday')->nullable();
             $table->string('rg')->nullable();
             $table->string('cpf')->nullable();

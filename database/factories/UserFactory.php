@@ -24,6 +24,17 @@ $factory->define(User::class, function (Faker $faker) {
 
     return [
         'name' => $faker->name,
+        'address' => $faker->streetAddress,
+        'city' => $faker->city,
+        'state' => $faker->state,
+        'membership' => $faker->date(),
+        'birthday' => $faker->date(),
+        'rg' => $faker->randomNumber(8),
+        'cpf' => $faker->randomNumber(8),
+        'blood' => $faker->randomElement(['A', 'A+', 'B', 'B-']),
+        'healthcare' => $faker->randomElement(['Amil', 'Prevent Senior', 'Amesp']),
+        'cbm' => $faker->boolean,
+        'cbm_institution' => $faker->randomElement(['CAB', 'GPM', 'CEU', 'CABA']),
         'email' => $faker->unique()->safeEmail,
         'photo' => $filePath,
         'number' => $faker->randomNumber(4),
