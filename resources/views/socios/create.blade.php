@@ -63,8 +63,8 @@
 
             <div class="col-md-6 col-sm-12">
                 <div class="form-group">
-                    <label for="membership-date">Ano de filiação</label>
-                    <input class="form-control" type="text" id="membership-date" name="membership_date">    
+                    <label for="membership">Ano de filiação</label>
+                    <input class="form-control" type="text" id="membership" name="membership">    
                 </div>
             </div>
 
