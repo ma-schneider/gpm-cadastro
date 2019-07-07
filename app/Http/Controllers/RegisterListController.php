@@ -13,6 +13,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Suport\Facades\Storage;
+use App\Http\Requests\UserUpdateRequest;
 use App\User;
 
 /**
@@ -51,6 +52,37 @@ class RegisterListController extends Controller
         $members = $this->user->paginate(4); 
         
         return view('socios.index', compact('members'));
+    }
+    
+    /**
+     * Update User data.
+     * 
+     * @param UserUpdateRequest $request User data
+     * @param Integer           $id      User id
+     * 
+     * @return Array
+     */
+    public function update(UserUpdateRequest $request, $id)
+    {
+        try {
+            $user = $this->user->find($id)->update($request->all());
+            $response = [
+                'message' => 'Cadastro atualizado com sucesso.',
+                'status' => true,
+            ];
+            return $response;
+
+        } catch (ValidationException $e) {
+            
+            $response = [
+                'message' => 'Algum problema ocorreu tentar atualizar o cadastro.',
+                'status' => false,
+                'error' => $e,
+            ];
+
+            return $response;
+        }
+
     }
 
     /**
