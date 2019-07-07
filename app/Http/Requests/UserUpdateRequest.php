@@ -39,7 +39,7 @@ class UserUpdateRequest extends FormRequest
             'blood' => 'required',
             'healthcare' => 'required',
             'cbm' => 'required',
-            'cbm_where' => 'required',
+            'cbm_institution' => 'required',
         ];
     }
 }
