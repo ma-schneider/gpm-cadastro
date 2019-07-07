@@ -82,9 +82,8 @@ class TestUpdateUser extends TestCase
      */
     public function testUserDataFailUpdate()
     {
-        $user = $this->user->toArray();
-        array_forget($user, 'name');
-        $response = $this->put('/socios/'.$this->user->id, $user);
-        $response->assertStatus(302);
+        $user = [];
+        $response = $this->put('/socios/'.$this->user->id, []);
+        $response->assertRedirect();
     }
 }

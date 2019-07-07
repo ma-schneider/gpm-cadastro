@@ -25,6 +25,21 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'email' => 'required',
+            'cpf' => 'required',
+            'rg' => 'required',
+            'number' => 'required',
+            'photo' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
+            'city' => 'required',       
+            'state' => 'required',
+            'membership' => 'required', 
+            'birthday' => 'required',
+            'blood' => 'required',
+            'healthcare' => 'required',
+            'cbm' => 'required',
+            'cbm_where' => 'required',
         ];
     }
 }
