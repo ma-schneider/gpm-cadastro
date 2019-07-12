@@ -29,7 +29,7 @@ class TestUpdateUser extends TestCase
 {
 
     protected $user;
-
+    protected $editResponse;
     /**
      * Initialize parameters.
      * 
@@ -39,6 +39,7 @@ class TestUpdateUser extends TestCase
     {
         parent::setUp();
         $this->user = factory(User::class)->create();
+        $this->editResponse = $this->get('/socios/' . $this->user->id . '/edit');
     }
 
     /**
@@ -85,5 +86,66 @@ class TestUpdateUser extends TestCase
         $user = [];
         $response = $this->put('/socios/'.$this->user->id, []);
         $response->assertRedirect();
+    }
+
+    /**
+     * Test if the Edit path exists.
+     * 
+     * @return void
+     */
+    public function testEditPath() 
+    {
+        $this->editResponse->assertOk();
+    }
+
+    /**
+     * Test if the right view is rendered.
+     * 
+     * @return void
+     */
+    public function testRenderRightView()
+    {
+        $this->editResponse->assertViewIs('socios.edit');
+    }
+    
+    /**
+     * Test if the view has the user parameter.
+     *
+     * @return void
+     */
+    public function testViewHasParameters()
+    {
+        $this->editResponse->assertViewHas('user');
+    }
+
+    
+    /**
+     * Test if the form fields is present.
+     *
+     * @return void
+     */
+    public function testViewHasfields()
+    {
+        $this->editResponse
+            ->assertSee('<form')
+            ->assertSee('Nome<')
+            ->assertSee('Telefone/Celular/Whatsapp<')
+            ->assertSee('Endereço<')
+            ->assertSee('Cidade<')
+            ->assertSee('Estado<')
+            ->assertSee('Ano de filiação<')
+            ->assertSee('Data de nascimento')
+            ->assertSee('RG<')
+            ->assertSee('CPF<')
+            ->assertSee('Tipo sanguíneo')
+            ->assertSee('Convênio médico')
+            ->assertSee('Participou do curso básico de montanhismo?<')
+            ->assertSee('Em qual entidade?')
+            ->assertSee('E-mail<')
+            ->assertSee('Número de sócio<')
+            ->assertSee('Foto<')
+            ->assertSee('Confirmação do e-mail<')
+            ->assertSee('Password<')
+            ->assertSee('Atualizar<');  
     }
 }

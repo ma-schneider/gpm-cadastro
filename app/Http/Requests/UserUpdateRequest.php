@@ -29,7 +29,7 @@ class UserUpdateRequest extends FormRequest
             'cpf' => 'required',
             'rg' => 'required',
             'number' => 'required',
-            'photo' => 'required',
+            //'photo' => 'required',
             'phone' => 'required',
             'address' => 'required',
             'city' => 'required',       

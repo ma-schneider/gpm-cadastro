@@ -55,6 +55,20 @@ class RegisterListController extends Controller
     }
     
     /**
+     * Render the user edit form
+     * 
+     * @param Integer $id User id
+     * 
+     * @return View 
+     */
+    public function edit($id)
+    {
+        $user = $this->user->findOrFail($id);
+
+        return view('socios.edit', compact('user'));
+    }
+
+    /**
      * Update User data.
      * 
      * @param UserUpdateRequest $request User data
@@ -65,12 +79,13 @@ class RegisterListController extends Controller
     public function update(UserUpdateRequest $request, $id)
     {
         try {
-            $user = $this->user->find($id)->update($request->all());
-            $response = [
-                'message' => 'Cadastro atualizado com sucesso.',
-                'status' => true,
-            ];
-            return $response;
+            $path = $this->storeFile($request);
+            $user = $request->all();
+            $user['photo'] = $path;
+            $this->user->find($id)->update($user);
+            
+            $request->session()->flash('success', 'Cadastro atualizado com sucesso.');
+            return redirect()->route('socios.edit', ['id' => $id]);
 
         } catch (ValidationException $e) {
             
@@ -79,8 +94,8 @@ class RegisterListController extends Controller
                 'status' => false,
                 'error' => $e,
             ];
-
-            return $response;
+            $request->session->flash('error', 'Ocorreu um problema ao tentar atualizar o cadastro.');
+            return redirect()->route('socios.update', ['id' => $id]);
         }
 
     }
