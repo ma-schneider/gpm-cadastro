@@ -13,6 +13,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Suport\Facades\Storage;
+use App\Http\Requests\UserUpdateRequest;
 use App\User;
 
 /**
@@ -51,6 +52,52 @@ class RegisterListController extends Controller
         $members = $this->user->paginate(4); 
         
         return view('socios.index', compact('members'));
+    }
+    
+    /**
+     * Render the user edit form
+     * 
+     * @param Integer $id User id
+     * 
+     * @return View 
+     */
+    public function edit($id)
+    {
+        $user = $this->user->findOrFail($id);
+
+        return view('socios.edit', compact('user'));
+    }
+
+    /**
+     * Update User data.
+     * 
+     * @param UserUpdateRequest $request User data
+     * @param Integer           $id      User id
+     * 
+     * @return Array
+     */
+    public function update(UserUpdateRequest $request, $id)
+    {
+        try {
+            $path = $this->storeFile($request);
+            $user = $request->all();
+            $user['photo'] = $path;
+            $this->user->find($id)->update($user);
+            
+            $request->session()->flash('success', 'Cadastro atualizado com sucesso.');
+            return redirect()->route('socios.edit', ['id' => $id]);
+
+        } catch (ValidationException $e) {
+            
+            $response = [
+                'message' => 'Algum problema ocorreu tentar atualizar o cadastro.',
+                'status' => false,
+                'error' => $e,
+            ];
+            $request->session->flash('error', 'Ocorreu um problema ao tentar atualizar o cadastro.');
+            return redirect()->route('socios.update', ['id' => $id]);
+        }
+
     }
 
     /**

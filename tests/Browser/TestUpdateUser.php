@@ -1,61 +1,68 @@
 <?php
+
 /**
- * Test for Create user form
+ * Test User update form.
  * 
  * @category Test
- * @package  CreateUserTest
+ * @package  UpdateUserTest
  * @author   Marcelo Schneider <schneider.fei@gmail.com>
  * @license  https://www.gnu.org/licenses/gpl-3.0.pt-br.html GNU
  * @link     https://github.com/ma-schneider/gpm-cadastro
  */
-
 namespace Tests\Browser;
 
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use App\User;
 
 /**
- * Test for Create user form
+ * Test User update form.
  * 
  * @category Test
- * @package  CreateUserTest
+ * @package  UpdateUserTest
  * @author   Marcelo Schneider <schneider.fei@gmail.com>
  * @license  https://www.gnu.org/licenses/gpl-3.0.pt-br.html GNU
  * @link     https://github.com/ma-schneider/gpm-cadastro
  */
-
-class CreateUserTest extends DuskTestCase
+class TestUpdateUser extends DuskTestCase
 {
 
     protected $user;
-
     protected $newUser;
 
     /**
-     * Set up the environment.
+     * Initialize tests parameters.
      * 
      * @return void
      */
-    protected function setUp(): void 
+    public function setUp(): void
     {
         parent::setUp();
-        $this->newUser = factory(User::class)->make();
         $this->user = factory(User::class)->create();
+        $this->newUser = factory(User::class)->make();
     }
 
     /**
-     * Form must create new user
+     * Reset test data.
      * 
      * @return void
      */
-    public function testUserForm()
+    protected function tearDown(): void
+    {
+        $this->artisan('migrate:refresh');
+    }
+
+    /**
+     * Must update a given user register data.
+     * 
+     * @return void
+     */
+    public function testUpdateUser()
     {
         $this->browse(
             function ($browser) {
                 $browser->loginAs($this->user)
-                    ->visit('/socios/create')
+                    ->visit('/socios/' . $this->user->id . 'edit')
                     ->type('name', $this->newUser->name)
                     ->type('email', $this->newUser->email)
                     ->type('phone', $this->newUser->phone)
@@ -74,13 +81,12 @@ class CreateUserTest extends DuskTestCase
                     ->type('number', $this->newUser->number)
                     ->attach('photo', __DIR__.'/photos/santos.jpg')
                     ->type('password', 'secret')
-                    ->click('@register')
-                    ->waitForLocation('/socios/create')
-                    ->assertSee('Sócio cadastrado com sucesso');
+                    ->click('@update')
+                    ->assertSee('Cadastro atualizado com sucesso.')
             }
         );
-        
-        $this->assertDatabaseHas('users', ['name' => $this->newUser->name]);
     }
+
+
 
 }

@@ -22,6 +22,18 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><h4>Número de sócio:</h4></li>
                 <li class="list-group-item"><h4>E-mail:</h4></li>
+                <li class="list-group-item"><h4>Data de associação:</h4></li>
+                <li class="list-group-item"><h4>Telefone:</h4></li>
+                <li class="list-group-item"><h4>Endereço:</h4></li>
+                <li class="list-group-item"><h4>Cidade:</h4></li>
+                <li class="list-group-item"><h4>Estado:</h4></li>
+                <li class="list-group-item"><h4>Data de nscimento:</h4></li>
+                <li class="list-group-item"><h4>RG:</h4></li>
+                <li class="list-group-item"><h4>CPF:</h4></li>
+                <li class="list-group-item"><h4>Tipo Sanguíneo:</h4></li>
+                <li class="list-group-item"><h4>Plano de saúde:</h4></li>
+                <li class="list-group-item"><h4>Fez cbm?:</h4></li>
+                <li class="list-group-item"><h4>CBM em:</h4></li>
                 <li class="list-group-item"><h4>Conta atualizado em:</h4></li>
                 <li class="list-group-item"><h4>Conta criada em:</h4></li>
             </ul>
@@ -30,6 +42,18 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><h4>{{ $user->number }}</h4></li>
                 <li class="list-group-item"><h4>{{ $user->email }}</h4></li>
+                <li class="list-group-item"><h4>{{ $user->membership }}</h4></li>
+                <li class="list-group-item"><h4>{{ $user->phone }}</h4></li>
+                <li class="list-group-item"><h4>{{ $user->address }}</h4></li>
+                <li class="list-group-item"><h4>{{ $user->city }}</h4></li>
+                <li class="list-group-item"><h4>{{ $user->state }}</h4></li>
+                <li class="list-group-item"><h4>{{ $user->birthday }}</h4></li>
+                <li class="list-group-item"><h4>{{ $user->rg }}</h4></li>
+                <li class="list-group-item"><h4>{{ $user->cpf }}</h4></li>
+                <li class="list-group-item"><h4>{{ $user->blood }}</h4></li>
+                <li class="list-group-item"><h4>{{ $user->healthcare }}</h4></li>
+                <li class="list-group-item"><h4>{{ $user->cbm }}</h4></li>
+                <li class="list-group-item"><h4>{{ $user->cbm_institution }}</h4></li>
                 <li class="list-group-item"><h4>{{ $user->updated_at }}</h4></li>
                 <li class="list-group-item"><h4>{{ $user->created_at }}</h4></li>
             </ul>
