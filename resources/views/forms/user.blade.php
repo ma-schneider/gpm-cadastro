@@ -122,11 +122,4 @@
         </div>
     </div>
 
-    <div class="col-md-6 col-sm-12">
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input class="form-control" type="password" id="password" name="password">    
-        </div>
-    </div>
-
 </div>
