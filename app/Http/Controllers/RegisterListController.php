@@ -83,9 +83,15 @@ class RegisterListController extends Controller
     {
         try {
             $path = $this->storeFile($request);
-            $user = $request->all();
-            $user['photo'] = $path;
-            $this->user->find($id)->update($user);
+            $data = $request->all();
+            
+            if ($path) {
+                $data['photo'] = $path;
+            }
+
+            $user = $this->user->find($id);
+            $user->fill($data);
+            $user->save();
             
             $request->session()->flash('success', 'Cadastro atualizado com sucesso.');
             return redirect()->route('socios.edit', ['id' => $id]);
@@ -195,8 +201,7 @@ class RegisterListController extends Controller
     /**
      * Gewnerate a password
      * 
-     * @param Array $user  User data
-     * @param Faker $faker Faker data
+     * @param Array $user User data
      * 
      * @return void
      */
