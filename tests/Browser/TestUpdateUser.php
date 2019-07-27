@@ -80,7 +80,6 @@ class TestUpdateUser extends DuskTestCase
                     ->type('email_verified_at', $this->newUser->email)
                     ->type('number', $this->newUser->number)
                     ->attach('photo', __DIR__.'/photos/santos.jpg')
-                    ->type('password', 'secret')
                     ->click('@update')
                     ->assertSee('Cadastro atualizado com sucesso.')
             }

@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Suport\Facades\Storage;
 use App\Http\Requests\UserUpdateRequest;
 use App\User;
+use Faker\Generator as Faker;
 
 /**
  * Test for Register List
@@ -29,6 +30,7 @@ class RegisterListController extends Controller
 {
 
     protected $user;
+    protected $faker;
 
     /**
      * Class constructor.
@@ -37,9 +39,10 @@ class RegisterListController extends Controller
      * 
      * @return void
      */
-    public function __construct(User $user) 
+    public function __construct(User $user, Faker $faker) 
     {
         $this->user = $user;
+        $this->faker = $faker;
     }
 
     /**
@@ -80,9 +83,15 @@ class RegisterListController extends Controller
     {
         try {
             $path = $this->storeFile($request);
-            $user = $request->all();
-            $user['photo'] = $path;
-            $this->user->find($id)->update($user);
+            $data = $request->all();
+            
+            if ($path) {
+                $data['photo'] = $path;
+            }
+
+            $user = $this->user->find($id);
+            $user->fill($data);
+            $user->save();
             
             $request->session()->flash('success', 'Cadastro atualizado com sucesso.');
             return redirect()->route('socios.edit', ['id' => $id]);
@@ -123,6 +132,11 @@ class RegisterListController extends Controller
             $path = $this->storeFile($request);
             $user = $request->all();
             $user['photo'] = $path;
+
+            if (!isset($user['password'])) {
+                $this->generatePassword($user);
+            }
+
             $this->user->create($user);
             $request->session()->flash('success', 'Sócio cadastrado com sucesso.');
             return redirect()->route('socios.create');
@@ -182,6 +196,18 @@ class RegisterListController extends Controller
         }
         
         return null;
+    }
+
+    /**
+     * Gewnerate a password
+     * 
+     * @param Array $user User data
+     * 
+     * @return void
+     */
+    protected function generatePassword(&$user)
+    {
+        $user['password'] = $this->faker->randomNumber(8); 
     }
 
 }

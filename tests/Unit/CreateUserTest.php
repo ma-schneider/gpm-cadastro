@@ -89,7 +89,6 @@ class CreateUserTest extends TestCase
             ->assertSee('Número de sócio<')
             ->assertSee('Foto<')
             ->assertSee('Confirmação do e-mail<')
-            ->assertSee('Password<')
             ->assertSee('Cadastrar<');  
     }
 

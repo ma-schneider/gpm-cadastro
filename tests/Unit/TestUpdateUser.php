@@ -145,7 +145,7 @@ class TestUpdateUser extends TestCase
             ->assertSee('Número de sócio<')
             ->assertSee('Foto<')
             ->assertSee('Confirmação do e-mail<')
-            ->assertSee('Password<')
+            ->assertDontSee('Password<')
             ->assertSee('Atualizar<');  
     }
 }
