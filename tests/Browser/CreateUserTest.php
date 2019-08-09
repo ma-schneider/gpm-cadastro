@@ -82,4 +82,36 @@ class CreateUserTest extends DuskTestCase
         $this->assertDatabaseHas('users', ['name' => $this->newUser->name]);
     }
 
+    /**
+     * Test the create form validation.
+     * 
+     * @return void
+     */
+    public function testValidation()
+    {
+        $this->browse(
+            function ($browser) {
+                $browser->loginAs($this->user)
+                    ->visit('/socios/create')
+                    ->click('@register')
+                    ->assertDontSee('Sócio cadastrado com sucesso')
+                    ->assertSee('O campo nome é obrigatório')
+                    ->assertSee('O campo email é obrigatório')
+                    ->assertSee('O campo telefone é obrigatório')
+                    ->assertSee('O campo endereço é obrigatório')
+                    ->assertSee('O campo cidade é obrigatório')
+                    ->assertSee('O campo estado é obrigatório')
+                    ->assertSee('O campo tipo sanguíneo é obrigatório')
+                    ->assertSee('O campo convênio médico é obrigatório')
+                    ->assertSee('O campo ano de filiação é obrigatório')
+                    ->assertSee('O campo data de nascimento é obrigatório')
+                    ->assertSee('O campo rg é obrigatório')
+                    ->assertSee('O campo cpf é obrigatório')
+                    ->assertSee('O campo número de sócio é obrigatório')
+                    ->assertSee('O campo foto é obrigatório');
+
+            }
+        );
+    }
+
 }

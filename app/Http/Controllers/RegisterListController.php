@@ -16,6 +16,7 @@ use Illuminate\Suport\Facades\Storage;
 use App\Http\Requests\UserUpdateRequest;
 use App\User;
 use Faker\Generator as Faker;
+use App\Http\Requests\Users\CreateRequest;
 
 /**
  * Test for Register List
@@ -35,7 +36,8 @@ class RegisterListController extends Controller
     /**
      * Class constructor.
      * 
-     * @param User $user User Instante
+     * @param User  $user  User  Instante
+     * @param Faker $faker Faker data
      * 
      * @return void
      */
@@ -122,11 +124,11 @@ class RegisterListController extends Controller
     /**
      * Store a new User
      * 
-     * @param Request $request Http Request
+     * @param CreateRequest $request Http Request
      * 
      * @return void
      */
-    public function store(Request $request)
+    public function store(CreateRequest $request)
     {
         try {
             $path = $this->storeFile($request);
